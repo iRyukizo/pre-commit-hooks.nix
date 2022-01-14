@@ -271,5 +271,39 @@ in
           entry = "${tools.html-tidy}/bin/tidy -quiet -errors";
           files = "\\.html$";
         };
+      trailing-whitespace =
+        {
+          name = "trim trailing whitespace";
+          description = "trims trailing whitespace.";
+          entry = "${pkgs.python39Packages.pre-commit-hooks}/bin/trailing-whitespace-fixer";
+          language = "python";
+          types = [ "text" ];
+          stages = [ "commit" "push" "manual" ];
+        };
+      end-of-file-fixer =
+        {
+          name = "fix end of files";
+          description = "ensures that a file is either empty, or ends with one newline.";
+          entry = "${pkgs.python39Packages.pre-commit-hooks}/bin/end-of-file-fixer";
+          language = "python";
+          types = [ "text" ];
+          stages = [ "commit" "push" "manual" ];
+        };
+      check-yaml =
+        {
+          name = "check yaml";
+          description = "checks yaml files for parseable syntax.";
+          entry = "${pkgs.python39Packages.pre-commit-hooks}/bin/check-yaml";
+          language = "python";
+          types = [ "yaml" ];
+        };
+      check-merge-conflict =
+        {
+          name = "check for merge conflicts";
+          description = " checks for files that contain merge conflict strings.";
+          entry = "${pkgs.python39Packages.pre-commit-hooks}/bin/check-merge-conflict";
+          language = "python";
+          types = [ "text" ];
+        };
     };
 }
